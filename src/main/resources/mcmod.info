@@ -1,0 +1,16 @@
+[
+{
+  "modid": "caliper",
+  "name": "Caliper",
+  "description": "A collection of tools for testing and developing mods and modpacks.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["NotAModder"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
