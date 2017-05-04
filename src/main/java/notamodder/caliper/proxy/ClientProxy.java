@@ -12,7 +12,7 @@ public class ClientProxy extends CommonProxy {
     public void preInit (FMLPreInitializationEvent event) {
 
         super.preInit(event);
-        
+
         Caliper.helper.registerInventoryModel(CaliperItems.LOOT_SPAWNER);
     }
 
@@ -20,7 +20,7 @@ public class ClientProxy extends CommonProxy {
     public void init (FMLInitializationEvent event) {
 
         super.init(event);
-        
+
         Caliper.helper.registerColorHandler(CaliperItems.LOOT_SPAWNER, (stack, index) -> stack.getTagCompound().getString("LootTable").hashCode());
     }
 

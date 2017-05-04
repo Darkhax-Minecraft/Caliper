@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import notamodder.notalib.utils.StackUtils;
 
 public class ItemLootSpawner extends Item {
-    
+
     @Override
     public ActionResult<ItemStack> onItemRightClick (World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 
@@ -34,7 +34,7 @@ public class ItemLootSpawner extends Item {
 
             playerIn.dropItem(stack, false);
         }
-        
+
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
