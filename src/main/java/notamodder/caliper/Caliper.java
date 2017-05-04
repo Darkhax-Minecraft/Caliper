@@ -31,11 +31,17 @@ public class Caliper {
         helper = new RegistryHelper(MODID).setTab(new CreativeTabs(MODID) {
 
             @Override
+            public boolean hasSearchBar () {
+
+                return true;
+            }
+
+            @Override
             public ItemStack getTabIconItem () {
-               
+
                 return new ItemStack(Items.STICK);
-            }         
-        });
+            }
+        }.setBackgroundImageName("item_search.png"));
         proxy.preInit(event);
     }
 
