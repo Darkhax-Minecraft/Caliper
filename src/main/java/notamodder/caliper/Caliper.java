@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import notamodder.caliper.proxy.CommonProxy;
 import notamodder.notalib.utils.RegistryHelper;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:notalib@[@VERSION_NOTALIB@,)")
 public class Caliper {
 
     public static final String MODID = "caliper";

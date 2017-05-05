@@ -40,6 +40,7 @@ minecraft {
     runDir = 'run'
     
     replace '@VERSION@', project.version
+    replace '@VERSION_NOTALIB@', "${version_notalib}"
     replaceIn "${mod_class}.java"
 }
 
