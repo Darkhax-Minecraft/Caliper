@@ -1,10 +1,5 @@
 package notamodder.caliper;
 
-import org.apache.logging.log4j.Logger;
-
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,6 +7,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import notamodder.caliper.proxy.CommonProxy;
 import notamodder.notalib.utils.RegistryHelper;
+
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:notalib@[@VERSION_NOTALIB@,)")
 public class Caliper {
@@ -28,20 +25,7 @@ public class Caliper {
     public void preInit (FMLPreInitializationEvent event) {
 
         log = event.getModLog();
-        helper = new RegistryHelper(MODID).setTab(new CreativeTabs(MODID) {
-
-            @Override
-            public boolean hasSearchBar () {
-
-                return true;
-            }
-
-            @Override
-            public ItemStack getTabIconItem () {
-
-                return new ItemStack(Items.STICK);
-            }
-        }.setBackgroundImageName("item_search.png"));
+        helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         proxy.preInit(event);
     }
 
