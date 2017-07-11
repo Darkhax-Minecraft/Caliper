@@ -1,16 +1,21 @@
-package notamodder.caliper;
+package com.jarhax.caliper;
 
+import org.apache.logging.log4j.Logger;
+
+import com.jarhax.caliper.commands.CommandCaliper;
+import com.jarhax.caliper.proxy.CommonProxy;
+
+import net.darkhax.bookshelf.registry.RegistryHelper;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import notamodder.caliper.proxy.CommonProxy;
-import notamodder.notalib.utils.RegistryHelper;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-import org.apache.logging.log4j.Logger;
-
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:notalib@[@VERSION_NOTALIB@,)")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "test2", dependencies = "required-after:bookshelf@[2.0.0.387,)")
 public class Caliper {
 
     public static final String MODID = "caliper";
@@ -27,6 +32,7 @@ public class Caliper {
         log = event.getModLog();
         helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         proxy.preInit(event);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @Mod.EventHandler
@@ -39,5 +45,11 @@ public class Caliper {
     public void postInit (FMLPostInitializationEvent event) {
 
         proxy.postInit(event);
+    }
+    
+    @EventHandler
+    public void serverStarting (FMLServerStartingEvent event) {
+
+        event.registerServerCommand(new CommandCaliper());
     }
 }

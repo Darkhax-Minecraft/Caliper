@@ -1,4 +1,4 @@
-package notamodder.caliper;
+package com.jarhax.caliper;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;

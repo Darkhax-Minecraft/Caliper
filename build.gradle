@@ -17,8 +17,8 @@ buildscript {
     
     dependencies {
     
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.8'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.9'
     }
 }
 
@@ -40,21 +40,20 @@ minecraft {
     runDir = 'run'
     
     replace '@VERSION@', project.version
-    replace '@VERSION_NOTALIB@', "${version_notalib}"
     replaceIn "${mod_class}.java"
 }
 
 repositories {
-
+    
     maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
+
+        url "http://maven.epoxide.org"
     }
 }
 
 dependencies {
 
-    deobfCompile "notalib:NotALib:${version_minecraft}:${version_notalib}"
+    deobfCompile "net.darkhax.bookshelf:Bookshelf:${version_bookshelf}"
 }
 
 processResources {

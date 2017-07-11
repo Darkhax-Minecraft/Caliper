@@ -1,7 +1,9 @@
-package notamodder.caliper.item;
+package com.jarhax.caliper.item;
 
 import java.util.List;
 
+import net.darkhax.bookshelf.util.StackUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +18,6 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import notamodder.notalib.utils.StackUtils;
 
 public class ItemLootSpawner extends Item {
 
@@ -40,18 +41,21 @@ public class ItemLootSpawner extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation (ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+    public void addInformation (ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
 
         tooltip.add(stack.getTagCompound().getString("LootTable"));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems (Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems (CreativeTabs tab, NonNullList<ItemStack> subItems) {
 
+        if (!this.isInCreativeTab(tab))
+            return;
+        
         for (final ResourceLocation location : LootTableList.getAll()) {
 
-            final ItemStack stack = StackUtils.prepareStack(new ItemStack(itemIn));
+            final ItemStack stack = StackUtils.prepareStack(new ItemStack(this));
             stack.getTagCompound().setString("LootTable", location.toString());
             subItems.add(stack);
         }

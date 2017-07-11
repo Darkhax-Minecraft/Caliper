@@ -1,7 +1,8 @@
-package notamodder.caliper.data;
+package com.jarhax.caliper.data;
+
+import com.jarhax.caliper.item.ItemLootSpawner;
 
 import net.minecraft.item.Item;
-import notamodder.caliper.item.ItemLootSpawner;
 
 public class CaliperItems {
 
