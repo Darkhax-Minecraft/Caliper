@@ -23,7 +23,7 @@ public class Caliper {
     public static Logger log;
     public static RegistryHelper helper;
 
-    @SidedProxy(clientSide = "notamodder.caliper.proxy.ClientProxy", serverSide = "notamodder.notalib.caliper.ServerProxy")
+    @SidedProxy(clientSide = "com.jarhax.caliper.proxy.ClientProxy", serverSide = "com.jarhax.caliper.proxy.ServerProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
