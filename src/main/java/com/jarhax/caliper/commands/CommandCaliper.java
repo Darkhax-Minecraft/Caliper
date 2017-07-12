@@ -9,6 +9,7 @@ public class CommandCaliper extends CommandTree {
 
         this.addSubcommand(new CommandTeleport());
         this.addSubcommand(new CommandCount());
+        this.addSubcommand(new CommandTPS());
     }
 
     @Override
