@@ -102,6 +102,11 @@ public class CommandCount extends Command {
             }
         }
         
+        else {
+            
+            sender.sendMessage(new TextComponentString("Please specify what to count. Valid options are entity, tile, ticktile, chunk"));
+        }
+        
         entries = sortByValue(entries);
         
         for (Entry<String, Integer> s : entries.entrySet()) {
