@@ -41,4 +41,10 @@ public class CommandTPS extends Command {
         
         sender.sendMessage(new TextComponentString(builder.createString()));
     }
+    
+    @Override
+    public int getRequiredPermissionLevel () {
+
+        return 0;
+    }
 }

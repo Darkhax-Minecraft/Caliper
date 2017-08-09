@@ -30,6 +30,12 @@ public class CommandCount extends Command {
     }
     
     @Override
+    public int getRequiredPermissionLevel () {
+
+        return 0;
+    }
+    
+    @Override
     public String getUsage (ICommandSender sender) {
         
         return "commands.count.usage";
