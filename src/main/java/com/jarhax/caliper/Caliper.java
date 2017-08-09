@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "test2", dependencies = "required-after:bookshelf@[2.0.0.387,)")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "test3", acceptableRemoteVersions = "*")
 public class Caliper {
 
     public static final String MODID = "caliper";
