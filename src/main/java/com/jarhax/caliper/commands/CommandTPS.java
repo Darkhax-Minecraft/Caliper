@@ -30,7 +30,7 @@ public class CommandTPS extends Command {
         TableBuilder<WorldServer> builder = new TableBuilder<WorldServer>();
         builder.setNewLine("\n");
         builder.addColumn("Name", world -> MiscUtils.getWorldName(world));
-        builder.addColumn("Entities", world -> world.getLoadedEntityList().size());
+        builder.addColumn("Entities", world -> world.loadedEntityList.size());
         builder.addColumn("Tiles", world -> world.loadedTileEntityList.size());
         builder.addColumn("Chunks", world -> MiscUtils.getChunkCount(world));
         
