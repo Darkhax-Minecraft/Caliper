@@ -19,6 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
 
 public class CommandCount extends Command {
@@ -105,7 +106,7 @@ public class CommandCount extends Command {
         
         for (Entry<String, Integer> s : entries.entrySet()) {
             
-            System.out.println(s.getKey() + ": " + s.getValue());
+            sender.sendMessage(new TextComponentString(s.getKey() + ": " + s.getValue()));
         }
     }
     
