@@ -11,37 +11,37 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.WorldServer;
 
 public class CommandTPS extends Command {
-    
+
     @Override
     public String getName () {
-        
+
         return "tps";
     }
-    
+
     @Override
     public String getUsage (ICommandSender sender) {
-        
+
         return "commands.tps.usage";
     }
-    
+
     @Override
     public void execute (MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-        
-        TableBuilder<WorldServer> builder = new TableBuilder<WorldServer>();
+
+        final TableBuilder<WorldServer> builder = new TableBuilder<>();
         builder.setNewLine("\n");
         builder.addColumn("Name", world -> MiscUtils.getWorldName(world));
         builder.addColumn("Entities", world -> world.loadedEntityList.size());
         builder.addColumn("Tiles", world -> world.loadedTileEntityList.size());
         builder.addColumn("Chunks", world -> MiscUtils.getChunkCount(world));
-        
-        for (WorldServer world : server.worlds) {
-            
+
+        for (final WorldServer world : server.worlds) {
+
             builder.addEntry(world);
         }
-        
+
         sender.sendMessage(new TextComponentString(builder.createString()));
     }
-    
+
     @Override
     public int getRequiredPermissionLevel () {
 

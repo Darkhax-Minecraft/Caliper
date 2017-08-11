@@ -50,9 +50,10 @@ public class ItemLootSpawner extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems (CreativeTabs tab, NonNullList<ItemStack> subItems) {
 
-        if (!this.isInCreativeTab(tab))
+        if (!this.isInCreativeTab(tab)) {
             return;
-        
+        }
+
         for (final ResourceLocation location : LootTableList.getAll()) {
 
             final ItemStack stack = StackUtils.prepareStack(new ItemStack(this));

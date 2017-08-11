@@ -34,34 +34,34 @@ public class CommandTeleport extends Command {
 
         EntityPlayerMP player = null;
         int dimension = 0;
-        
+
         if (args.length == 1 && sender instanceof EntityPlayerMP) {
 
             player = (EntityPlayerMP) sender;
-            dimension = getDimension(args[0]);
+            dimension = this.getDimension(args[0]);
         }
-        
+
         else if (args.length == 2) {
-            
+
             player = getPlayer(server, sender, args[0]);
-            dimension = getDimension(args[1]);
+            dimension = this.getDimension(args[1]);
         }
-        
+
         if (player == null) {
-            
+
             throw new CommandException("command.caliper.tp.badplayer");
         }
-        
+
         PlayerUtils.changeDimension(player, dimension);
     }
-    
-    private int getDimension(String arg) throws CommandException {
-        
+
+    private int getDimension (String arg) throws CommandException {
+
         if (!NumberUtils.isParsable(arg)) {
-            
+
             throw new CommandException("command.caliper.tp.baddim");
         }
-        
+
         return Integer.parseInt(arg);
     }
 }

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "test3", acceptableRemoteVersions = "*")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "test4", acceptableRemoteVersions = "*")
 public class Caliper {
 
     public static final String MODID = "caliper";
@@ -46,7 +46,7 @@ public class Caliper {
 
         proxy.postInit(event);
     }
-    
+
     @EventHandler
     public void serverStarting (FMLServerStartingEvent event) {
 

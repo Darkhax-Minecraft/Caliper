@@ -32,8 +32,8 @@ public class TableBuilder<T> {
     private final List<Function<? super T, String>> columnFunctions = new ArrayList<>();
 
     /**
-     * Defines a new column for the table. This sets the name of the column, and a function
-     * which is used to generate row data.
+     * Defines a new column for the table. This sets the name of the column, and a function which
+     * is used to generate row data.
      *
      * @param name The name for the column.
      * @param function The function to apply to the object. Used to generate row data for the
@@ -140,7 +140,7 @@ public class TableBuilder<T> {
         }
 
         builder.append(DIVIDER_COLUMN);
-        builder.append(NEW_LINE);
+        builder.append(this.NEW_LINE);
 
         // Column Seperator
         builder.append(DIVIDER_COLUMN);
@@ -155,7 +155,7 @@ public class TableBuilder<T> {
         }
 
         builder.append(LINE_ENDING);
-        builder.append(NEW_LINE);
+        builder.append(this.NEW_LINE);
 
         // Column Data
         for (final T entry : entries) {
@@ -172,14 +172,14 @@ public class TableBuilder<T> {
             }
 
             builder.append(DIVIDER_COLUMN);
-            builder.append(NEW_LINE);
+            builder.append(this.NEW_LINE);
         }
 
         return builder.toString();
     }
-    
-    public void setNewLine(String newline) {
-        
+
+    public void setNewLine (String newline) {
+
         this.NEW_LINE = newline;
     }
 }
