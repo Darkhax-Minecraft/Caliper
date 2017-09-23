@@ -1,16 +1,11 @@
 package com.jarhax.caliper;
 
-import java.util.List;
-
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.lib.LoggingHelper;
 import net.darkhax.bookshelf.registry.RegistryHelper;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -20,9 +15,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.1.427,)", acceptedMinecraftVersions = "[1.12,1.12.2)", acceptableRemoteVersions = "*",  certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.1.427,)", acceptableRemoteVersions = "*",  certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
     public static final String MODID = "caliper";
