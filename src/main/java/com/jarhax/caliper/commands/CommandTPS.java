@@ -1,9 +1,9 @@
 package com.jarhax.caliper.commands;
 
-import com.jarhax.caliper.MiscUtils;
 import com.jarhax.caliper.TableBuilder;
 
 import net.darkhax.bookshelf.command.Command;
+import net.darkhax.bookshelf.util.WorldUtils;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
@@ -29,10 +29,10 @@ public class CommandTPS extends Command {
 
         final TableBuilder<WorldServer> builder = new TableBuilder<>();
         builder.setNewLine("\n");
-        builder.addColumn("Name", world -> MiscUtils.getWorldName(world));
+        builder.addColumn("Name", world -> WorldUtils.getWorldName(world));
         builder.addColumn("Entities", world -> world.loadedEntityList.size());
         builder.addColumn("Tiles", world -> world.loadedTileEntityList.size());
-        builder.addColumn("Chunks", world -> MiscUtils.getChunkCount(world));
+        builder.addColumn("Chunks", world -> WorldUtils.getLoadedChunks(world));
 
         for (final WorldServer world : server.worlds) {
 

@@ -2,12 +2,13 @@ package com.jarhax.caliper.debuggers;
 
 import java.util.List;
 
-import com.jarhax.caliper.MiscUtils;
+import com.jarhax.caliper.Caliper;
 
+import net.darkhax.bookshelf.util.ModUtils;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class DebugEntitySpawns {
@@ -28,7 +29,7 @@ public class DebugEntitySpawns {
                 		info.add("Biome: " + biome.getRegistryName().toString());
                 		info.add("Spawn Groups - Min: " + spawn.minGroupCount + " Max: " + spawn.maxGroupCount);
                 		
-                		final EntityEntry entityInfo = MiscUtils.getEntityEntry(spawn.entityClass);
+                		final EntityRegistration entityInfo = ModUtils.getRegistryInfo(spawn.entityClass);
                 		
                 		if (entityInfo != null) {
                 			
@@ -37,7 +38,7 @@ public class DebugEntitySpawns {
                 		
                 		info.add("Entity Class: " + spawn.entityClass.getName());
                 		
-                		MiscUtils.bigWarning(false, info);
+                		Caliper.LOG.noticableWarning(false, info);
                 	}
                 }
             }

@@ -58,7 +58,7 @@ repositories {
 
 dependencies {
 
-    deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.1:${version_bookshelf}"
+    deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:${version_bookshelf}"
 }
 
 processResources {
