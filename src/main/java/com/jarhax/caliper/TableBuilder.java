@@ -32,8 +32,8 @@ public class TableBuilder<T> {
     private final List<Function<? super T, String>> columnFunctions = new ArrayList<>();
 
     /**
-     * Defines a new column for the table. This sets the name of the column, and a function which
-     * is used to generate row data.
+     * Defines a new column for the table. This sets the name of the column, and a function
+     * which is used to generate row data.
      *
      * @param name The name for the column.
      * @param function The function to apply to the object. Used to generate row data for the
