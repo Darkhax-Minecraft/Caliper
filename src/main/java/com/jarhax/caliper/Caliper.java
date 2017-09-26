@@ -2,21 +2,24 @@ package com.jarhax.caliper;
 
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
+import com.jarhax.caliper.debuggers.DebugLoadtimes;
 import com.jarhax.caliper.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.lib.LoggingHelper;
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.1.427,)", acceptableRemoteVersions = "*",  certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.1.427,)", acceptableRemoteVersions = "*", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
     public static final String MODID = "caliper";
@@ -27,6 +30,11 @@ public class Caliper {
     @SidedProxy(clientSide = "com.jarhax.caliper.proxy.ClientProxy", serverSide = "com.jarhax.caliper.proxy.ServerProxy")
     public static CommonProxy proxy;
 
+    public Caliper () {
+
+        ((org.apache.logging.log4j.core.Logger) FMLLog.log).addFilter(new DebugLoadtimes());
+    }
+
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
 
@@ -35,17 +43,17 @@ public class Caliper {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void init (FMLInitializationEvent event) {
 
         proxy.init(event);
     }
 
-    @Mod.EventHandler
+    @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
 
         proxy.postInit(event);
-        
+
         DebugEntitySpawns.debug();
     }
 
@@ -54,11 +62,16 @@ public class Caliper {
 
         event.registerServerCommand(new CommandCaliper());
     }
-    
-    
+
     @EventHandler
-    public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
-        
+    public void onLoadComplete (FMLLoadCompleteEvent event) {
+
+        DebugLoadtimes.onLoadingComplete();
+    }
+
+    @EventHandler
+    public void onFingerprintViolation (FMLFingerprintViolationEvent event) {
+
         LOG.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
     }
 }
