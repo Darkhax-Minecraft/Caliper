@@ -1,5 +1,7 @@
 package com.jarhax.caliper;
 
+import java.io.File;
+
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.debuggers.DebugEventListeners;
@@ -39,6 +41,12 @@ public class Caliper {
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
 
+        File logDir = new File("logs/caliper/");
+        
+        if (!logDir.exists()) {
+            logDir.mkdirs();
+        }
+        
         helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         BookshelfRegistry.addCommand(new CommandCaliper());
         proxy.preInit(event);
