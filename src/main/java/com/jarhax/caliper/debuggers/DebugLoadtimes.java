@@ -58,7 +58,7 @@ public class DebugLoadtimes extends AbstractFilter {
         // Prints out info
         try {
 
-            final File file = new File("logs/game-analysis.md");
+            final File file = new File("logs/caliper/game-analysis.md");
             final FileWriter writer = new FileWriter(file, false);
 
             writer.append("# Analysis - " + TIME_FORMAT.format(new Date()));

@@ -34,7 +34,7 @@ public class DebugEventListeners {
 
         try {
 
-            final File file = new File("logs/event-analysis.md");
+            final File file = new File("logs/caliper/event-analysis.md");
             final FileWriter writer = new FileWriter(file, false);
 
             writer.append("# Analysis - " + TIME_FORMAT.format(new Date()));
