@@ -2,6 +2,7 @@ package com.jarhax.caliper;
 
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
+import com.jarhax.caliper.debuggers.DebugEventListeners;
 import com.jarhax.caliper.debuggers.DebugLoadtimes;
 import com.jarhax.caliper.proxy.CommonProxy;
 
@@ -62,6 +63,7 @@ public class Caliper {
     public void onLoadComplete (FMLLoadCompleteEvent event) {
 
         DebugLoadtimes.onLoadingComplete();
+        DebugEventListeners.printAllListeners();
     }
 
     @EventHandler
