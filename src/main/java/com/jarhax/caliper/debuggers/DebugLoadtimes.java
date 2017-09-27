@@ -29,6 +29,8 @@ public class DebugLoadtimes extends AbstractFilter {
     private static final Map<String, LoadInfo> MODS = new HashMap<>();
 
     private static final String NEW_LINE = System.lineSeparator();
+    
+    public static int signedMods = 0;
 
     /**
      * Hook for when FML finishes loading mods.
@@ -64,6 +66,8 @@ public class DebugLoadtimes extends AbstractFilter {
             writer.append("# Analysis - " + TIME_FORMAT.format(new Date()));
             writer.append(NEW_LINE + NEW_LINE);
             writer.append(WordUtils.wrap("This file contains an alaysis of the game state. This analysis was performed by the mod Caliper. The purpose of this analysis is to provide the user concise debug information about their game instance. This analysis will also have warnings for common errors with Minecraft mods. This data is anonymous, and is not automatically submitted to any online service.", 80));
+            writer.append(NEW_LINE + NEW_LINE);
+            writer.append("Signed Mods: " + signedMods + " (" + MathsUtils.round((double) signedMods / Loader.instance().getActiveModList().size(), 2) + "%)");
             writer.append(NEW_LINE + NEW_LINE);
             writer.append(table.createString());
 
@@ -206,6 +210,11 @@ public class DebugLoadtimes extends AbstractFilter {
                     if (container instanceof FMLModContainer) {
 
                         this.signed = !(boolean) ReflectionHelper.getPrivateValue(FMLModContainer.class, (FMLModContainer) container, "fingerprintNotPresent");
+                        
+                        if (this.signed) {
+                            
+                            DebugLoadtimes.signedMods++;
+                        }
                     }
                 }
 
