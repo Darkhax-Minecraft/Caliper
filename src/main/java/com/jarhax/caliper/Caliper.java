@@ -1,11 +1,10 @@
 package com.jarhax.caliper;
 
-import java.io.File;
-
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.debuggers.DebugEventListeners;
 import com.jarhax.caliper.debuggers.DebugLoadtimes;
+import com.jarhax.caliper.debuggers.DebugRegistryDump;
 import com.jarhax.caliper.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
@@ -22,7 +21,7 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.1.450,)", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, acceptedMinecraftVersions = "1.12.1", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
     public static final String MODID = "caliper";
@@ -40,12 +39,6 @@ public class Caliper {
 
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
-
-        File logDir = new File("logs/caliper/");
-        
-        if (!logDir.exists()) {
-            logDir.mkdirs();
-        }
         
         helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         BookshelfRegistry.addCommand(new CommandCaliper());
@@ -72,6 +65,7 @@ public class Caliper {
 
         DebugLoadtimes.onLoadingComplete();
         DebugEventListeners.printAllListeners();
+        // DebugRegistryDump.onLoadingComplete();
     }
 
     @EventHandler
