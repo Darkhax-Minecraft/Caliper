@@ -1,10 +1,12 @@
 package com.jarhax.caliper;
 
+import java.io.File;
+
 import com.jarhax.caliper.commands.CommandCaliper;
 import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.debuggers.DebugEventListeners;
+import com.jarhax.caliper.debuggers.DebugIdUsage;
 import com.jarhax.caliper.debuggers.DebugLoadtimes;
-import com.jarhax.caliper.debuggers.DebugRegistryDump;
 import com.jarhax.caliper.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
@@ -39,7 +41,8 @@ public class Caliper {
 
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
-        
+
+        new File("logs/caliper/").mkdirs();
         helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         BookshelfRegistry.addCommand(new CommandCaliper());
         proxy.preInit(event);
@@ -65,7 +68,8 @@ public class Caliper {
 
         DebugLoadtimes.onLoadingComplete();
         DebugEventListeners.printAllListeners();
-        DebugRegistryDump.onLoadingComplete();
+        // DebugRegistryDump.onLoadingComplete();
+        DebugIdUsage.onLoadingComplete();
     }
 
     @EventHandler
