@@ -27,14 +27,25 @@ public class DebugIdUsage {
 
     private static final String NEW_LINE = System.lineSeparator();
 
+    private static final int MAX_BLOCK_ID = 4096;
+    private static final int MAX_ITEM_ID = 32000;
+    private static final int MAX_POTION_ID = 256;
+    private static final int MAX_BIOME_ID = 256;
+    private static final int MAX_ENCHANTMENT_ID = Short.MAX_VALUE;
+    private static final int MAX_ENTITY_ID = Integer.MAX_VALUE >> 5;
+    private static final int MAX_RECIPE_ID = Integer.MAX_VALUE >> 5;
+
+    private static int usedBlockId = 0;
+    private static int usedItemId = 0;
+    private static int usedPotionId = 0;
+    private static int usedBiomeId = 0;
+    private static int usedEnchantmentId = 0;
+    private static int usedEntityId = 0;
+    private static int usedRecipeId = 0;
+
     public static void onLoadingComplete () {
 
-        final TableBuilder<LoadInfo> table = new TableBuilder<>();
-        table.addColumn("Mod", (info) -> info.mod);
-        table.addColumn("Blocks", (info) -> info.blockIds);
-        table.addColumn("Items", (info) -> info.itemIds);
-        table.addColumn("Entities", (info) -> info.entityIds);
-        table.addColumn("File Name", (info) -> info.sourceFile);
+        final TableBuilder<LoadInfo> table = makeTable(false);
 
         long time = System.currentTimeMillis();
 
@@ -82,6 +93,11 @@ public class DebugIdUsage {
         MODS.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach( (info) -> table.addEntry(info.getValue()));
         MODS.clear();
 
+        final TableBuilder<LoadInfo> global = makeTable(true);
+        global.addEntry(LoadInfo.getMaximums());
+        global.addEntry(LoadInfo.getAvailable());
+        global.addEntry(LoadInfo.getUsed());
+
         // Prints out info
         try {
 
@@ -94,6 +110,8 @@ public class DebugIdUsage {
             writer.append(NEW_LINE + NEW_LINE);
             writer.append("Analysis took " + MathsUtils.round(time / 1000, 2) + " seconds.");
             writer.append(NEW_LINE + NEW_LINE);
+            writer.append(global.createString());
+            writer.append(NEW_LINE + NEW_LINE);
             writer.append(table.createString());
 
             writer.close();
@@ -104,14 +122,36 @@ public class DebugIdUsage {
         }
     }
 
+    private static TableBuilder<LoadInfo> makeTable (boolean isGlobal) {
+
+        final TableBuilder<LoadInfo> table = new TableBuilder<>();
+        table.addColumn("Mod", (info) -> info.mod);
+        table.addColumn("Blocks", (info) -> info.blockIds);
+        table.addColumn("Items", (info) -> info.itemIds);
+        table.addColumn("Entities", (info) -> info.entityIds);
+
+        if (!isGlobal) {
+
+            table.addColumn("File Name", (info) -> info.sourceFile);
+        }
+
+        return table;
+    }
+
     private static class LoadInfo implements Comparable<LoadInfo> {
 
-        public final String mod;
+        public String mod;
         public String sourceFile;
 
         public int blockIds;
         public int itemIds;
         public int entityIds;
+
+        public int total = -5000;
+
+        public LoadInfo () {
+
+        }
 
         public LoadInfo (ModContainer container) {
 
@@ -121,13 +161,61 @@ public class DebugIdUsage {
 
         public int getTotal () {
 
-            return this.blockIds + this.itemIds + this.entityIds;
+            if (this.total < 0) {
+
+                this.total = this.blockIds + this.itemIds + this.entityIds;
+
+                usedBlockId += this.blockIds;
+                usedItemId += this.itemIds;
+                usedEntityId += this.entityIds;
+            }
+
+            return this.total;
         }
 
         @Override
         public int compareTo (LoadInfo o) {
 
             return Integer.valueOf(this.getTotal()).compareTo(o.getTotal());
+        }
+
+        public static LoadInfo getMaximums () {
+
+            final LoadInfo info = new LoadInfo();
+
+            info.mod = "Maximum";
+
+            info.blockIds = MAX_BLOCK_ID;
+            info.itemIds = MAX_ITEM_ID;
+            info.entityIds = MAX_ENTITY_ID;
+
+            return info;
+        }
+
+        public static LoadInfo getUsed () {
+
+            final LoadInfo info = new LoadInfo();
+
+            info.mod = "Used";
+
+            info.blockIds = usedBlockId;
+            info.itemIds = usedItemId;
+            info.entityIds = usedEntityId;
+
+            return info;
+        }
+
+        public static LoadInfo getAvailable () {
+
+            final LoadInfo info = new LoadInfo();
+
+            info.mod = "Available";
+
+            info.blockIds = MAX_BLOCK_ID - usedBlockId;
+            info.itemIds = MAX_ITEM_ID - usedItemId;
+            info.entityIds = MAX_ENTITY_ID - usedEntityId;
+
+            return info;
         }
     }
 }
