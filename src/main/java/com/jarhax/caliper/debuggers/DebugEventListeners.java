@@ -139,34 +139,42 @@ public class DebugEventListeners {
             // Splits the readable info into parts, so we can grab info no longer available.
             final String[] parts = event.toString().split(" ");
 
-            if (!parts[1].equalsIgnoreCase("forge")) {
+            try {
+               
+                if (!parts[1].equalsIgnoreCase("forge")) {
 
-                // Sets info from readable data
-                this.location = parts[1].substring(0, parts[1].lastIndexOf("@"));
-                this.event = parts[2].substring(parts[2].lastIndexOf("/") + 1, parts[2].length() - 3);
-                this.method = parts[2].substring(0, parts[2].indexOf("("));
+                    // Sets info from readable data
+                    this.location = parts[1].substring(0, parts[1].lastIndexOf("@"));
+                    this.event = parts[2].substring(parts[2].lastIndexOf("/") + 1, parts[2].length() - 3);
+                    this.method = parts[2].substring(0, parts[2].indexOf("("));
 
-                // Gets info from the annotation
-                final SubscribeEvent subInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
+                    // Gets info from the annotation
+                    final SubscribeEvent subInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
 
-                if (subInfo != null) {
+                    if (subInfo != null) {
 
-                    this.priority = subInfo.priority().name().toLowerCase();
-                    this.recievedCanceled = Boolean.toString(subInfo.receiveCanceled());
+                        this.priority = subInfo.priority().name().toLowerCase();
+                        this.recievedCanceled = Boolean.toString(subInfo.receiveCanceled());
+                    }
+
+                    final ModContainer ownerInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "owner");
+
+                    if (this.owner != null) {
+
+                        this.owner = ownerInfo.getName();
+                        this.source = ownerInfo.getSource() != null ? ownerInfo.getSource().getName() : "unknown";
+                    }
                 }
 
-                final ModContainer ownerInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "owner");
+                else {
 
-                if (this.owner != null) {
-
-                    this.owner = ownerInfo.getName();
-                    this.source = ownerInfo.getSource() != null ? ownerInfo.getSource().getName() : "unknown";
+                    this.isModEvent = false;
                 }
             }
-
-            else {
-
-                this.isModEvent = false;
+            
+            catch (StringIndexOutOfBoundsException e) {
+                
+                Caliper.LOG.error("Unable to parse event listener: " + event.toString());
             }
         }
     }
