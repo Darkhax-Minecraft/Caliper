@@ -7,7 +7,6 @@ import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.debuggers.DebugEventListeners;
 import com.jarhax.caliper.debuggers.DebugIdUsage;
 import com.jarhax.caliper.debuggers.DebugLoadtimes;
-import com.jarhax.caliper.proxy.CommonProxy;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
@@ -15,7 +14,6 @@ import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
@@ -30,32 +28,28 @@ public class Caliper {
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
     public static final RegistryHelper helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
 
-    @SidedProxy(clientSide = "com.jarhax.caliper.proxy.ClientProxy", serverSide = "com.jarhax.caliper.proxy.ServerProxy")
-    public static CommonProxy proxy;
-
     public Caliper () {
 
+        // Apply a log4j filter to read load time messages.
         ((org.apache.logging.log4j.core.Logger) FMLLog.log).addFilter(new DebugLoadtimes());
     }
 
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
 
+        // Create the caliper log directory if it doesn't exist. 
         new File("logs/caliper/").mkdirs();
+        
         BookshelfRegistry.addCommand(new CommandCaliper());
-        proxy.preInit(event);
     }
 
     @EventHandler
     public void init (FMLInitializationEvent event) {
 
-        proxy.init(event);
     }
 
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
-
-        proxy.postInit(event);
 
         DebugEntitySpawns.debug();
     }
