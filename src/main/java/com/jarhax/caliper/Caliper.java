@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, acceptedMinecraftVersions = "1.12.1", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
     public static final String MODID = "caliper";
