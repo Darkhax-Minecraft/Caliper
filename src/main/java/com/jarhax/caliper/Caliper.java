@@ -40,6 +40,7 @@ public class Caliper {
         // Create the caliper log directory if it doesn't exist. 
         new File("logs/caliper/").mkdirs();
         
+        // Adds the caliper tree command.
         BookshelfRegistry.addCommand(new CommandCaliper());
     }
 
@@ -51,14 +52,21 @@ public class Caliper {
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
 
+        // Finds broken entity spawns
+        // TODO replace with error detecting system.
         DebugEntitySpawns.debug();
     }
 
     @EventHandler
     public void onLoadComplete (FMLLoadCompleteEvent event) {
 
+        // Prints load time info.
         DebugLoadtimes.onLoadingComplete();
+        
+        // Prints all current event listeners.
         DebugEventListeners.printAllListeners();
+        
+        // Prints registry id usage.
         DebugIdUsage.onLoadingComplete();
     }
 
