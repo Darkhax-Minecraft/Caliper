@@ -28,7 +28,7 @@ public class Caliper {
     public static final String MODID = "caliper";
     public static final String NAME = "Caliper";
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
-    public static RegistryHelper helper;
+    public static final RegistryHelper helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
 
     @SidedProxy(clientSide = "com.jarhax.caliper.proxy.ClientProxy", serverSide = "com.jarhax.caliper.proxy.ServerProxy")
     public static CommonProxy proxy;
@@ -42,7 +42,6 @@ public class Caliper {
     public void preInit (FMLPreInitializationEvent event) {
 
         new File("logs/caliper/").mkdirs();
-        helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         BookshelfRegistry.addCommand(new CommandCaliper());
         proxy.preInit(event);
     }
