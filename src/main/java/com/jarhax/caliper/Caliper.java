@@ -68,7 +68,6 @@ public class Caliper {
 
         DebugLoadtimes.onLoadingComplete();
         DebugEventListeners.printAllListeners();
-        // DebugRegistryDump.onLoadingComplete();
         DebugIdUsage.onLoadingComplete();
     }
 
