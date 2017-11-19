@@ -12,7 +12,6 @@ import com.jarhax.caliper.proxy.CommonProxy;
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
 import net.darkhax.bookshelf.registry.RegistryHelper;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -46,7 +45,6 @@ public class Caliper {
         helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
         BookshelfRegistry.addCommand(new CommandCaliper());
         proxy.preInit(event);
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     @EventHandler
