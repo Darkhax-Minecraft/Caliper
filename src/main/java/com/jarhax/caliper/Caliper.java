@@ -20,13 +20,11 @@ import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Caliper.MODID, name = Caliper.NAME, version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "caliper", name = "Caliper", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
-    public static final String MODID = "caliper";
-    public static final String NAME = "Caliper";
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
-    public static final RegistryHelper helper = new RegistryHelper(MODID).setTab(new CreativeTabCaliper());
+    public static final RegistryHelper helper = new RegistryHelper("caliper").setTab(new CreativeTabCaliper());
 
     public Caliper () {
 
