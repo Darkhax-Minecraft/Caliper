@@ -10,7 +10,6 @@ import com.jarhax.caliper.debuggers.DebugLoadtimes;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
-import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +23,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Caliper {
 
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
-    public static final RegistryHelper helper = new RegistryHelper("caliper").setTab(new CreativeTabCaliper());
 
     public Caliper () {
 
