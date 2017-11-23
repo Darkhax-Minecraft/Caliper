@@ -140,7 +140,7 @@ public class DebugEventListeners {
             final String[] parts = event.toString().split(" ");
 
             try {
-               
+
                 if (!parts[1].equalsIgnoreCase("forge")) {
 
                     // Sets info from readable data
@@ -171,9 +171,9 @@ public class DebugEventListeners {
                     this.isModEvent = false;
                 }
             }
-            
-            catch (StringIndexOutOfBoundsException e) {
-                
+
+            catch (final StringIndexOutOfBoundsException e) {
+
                 Caliper.LOG.error("Unable to parse event listener: " + event.toString());
             }
         }
