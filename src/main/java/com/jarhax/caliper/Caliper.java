@@ -7,6 +7,7 @@ import com.jarhax.caliper.debuggers.DebugEntitySpawns;
 import com.jarhax.caliper.debuggers.DebugEventListeners;
 import com.jarhax.caliper.debuggers.DebugIdUsage;
 import com.jarhax.caliper.debuggers.DebugLoadtimes;
+import com.jarhax.caliper.debuggers.DebugTextureMap;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
@@ -18,6 +19,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid = "caliper", name = "Caliper", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
@@ -33,9 +36,9 @@ public class Caliper {
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
 
-        // Create the caliper log directory if it doesn't exist. 
+        // Create the caliper log directory if it doesn't exist.
         new File("logs/caliper/").mkdirs();
-        
+
         // Adds the caliper tree command.
         BookshelfRegistry.addCommand(new CommandCaliper());
     }
@@ -58,12 +61,19 @@ public class Caliper {
 
         // Prints load time info.
         DebugLoadtimes.onLoadingComplete();
-        
+
         // Prints all current event listeners.
         DebugEventListeners.printAllListeners();
-        
+
         // Prints registry id usage.
         DebugIdUsage.onLoadingComplete();
+    }
+
+    @EventHandler
+    @SideOnly(Side.CLIENT)
+    public void onClientLoadComplete (FMLLoadCompleteEvent event) {
+
+        DebugTextureMap.run();
     }
 
     @EventHandler
