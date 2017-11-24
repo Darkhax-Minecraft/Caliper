@@ -25,7 +25,7 @@ public class CommandEmptyRecipe extends Command {
     @Override
     public String getUsage (ICommandSender sender) {
 
-        return "commands.recipe.usage";
+        return "/caliper recipe book|bookall|normal|normalall";
     }
 
     @Override

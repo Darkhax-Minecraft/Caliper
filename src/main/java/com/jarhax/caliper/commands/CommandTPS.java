@@ -21,7 +21,7 @@ public class CommandTPS extends Command {
     @Override
     public String getUsage (ICommandSender sender) {
 
-        return "commands.tps.usage";
+        return "/caliper tps";
     }
 
     @Override

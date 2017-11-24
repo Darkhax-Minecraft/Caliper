@@ -38,7 +38,7 @@ public class CommandCount extends Command {
     @Override
     public String getUsage (ICommandSender sender) {
 
-        return "commands.count.usage";
+        return "/caliper count entity|tile|ticktile|chunk";
     }
 
     @Override

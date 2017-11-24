@@ -26,7 +26,7 @@ public class CommandTeleport extends Command {
     @Override
     public String getUsage (ICommandSender sender) {
 
-        return "commands.tp.usage";
+        return "/caliper tp <player> <dimension>";
     }
 
     @Override
