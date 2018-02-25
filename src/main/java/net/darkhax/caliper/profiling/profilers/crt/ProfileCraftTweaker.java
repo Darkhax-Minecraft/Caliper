@@ -14,7 +14,7 @@ import net.darkhax.caliper.Caliper;
 import net.darkhax.caliper.FileHelper;
 import net.darkhax.caliper.profiling.Profiler;
 import net.darkhax.caliper.profiling.RegisterProfiler;
-import net.darkhax.caliper.profiling.profilers.LoadTime;
+import net.darkhax.caliper.profiling.profilers.InfoPair;
 
 @RegisterProfiler(name = "CraftTweaker Analysis", description = "Profiles CraftTweaker and scripts that use it.")
 public class ProfileCraftTweaker extends Profiler {
@@ -42,11 +42,11 @@ public class ProfileCraftTweaker extends Profiler {
     @Override
     public void onLoadComplete () {
 
-        final TableBuilder<LoadTime> builder = LoadTime.createDataTable();
+        final TableBuilder<InfoPair> builder = InfoPair.createDataTable("Script Name", "Time", "ms");
 
         for (final Entry<String, Long> entry : this.start.entrySet()) {
 
-            builder.addEntry(new LoadTime(entry.getKey(), entry.getValue(), this.stop.get(entry.getKey())));
+            builder.addEntry(new InfoPair(entry.getKey(), entry.getValue(), this.stop.get(entry.getKey())));
         }
 
         Collections.sort(builder.getEntries(), Collections.reverseOrder());
