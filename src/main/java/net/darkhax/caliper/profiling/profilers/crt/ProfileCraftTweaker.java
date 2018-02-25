@@ -15,6 +15,7 @@ import net.darkhax.caliper.FileHelper;
 import net.darkhax.caliper.profiling.Profiler;
 import net.darkhax.caliper.profiling.RegisterProfiler;
 import net.darkhax.caliper.profiling.profilers.InfoPair;
+import net.minecraftforge.fml.common.Loader;
 
 @RegisterProfiler(name = "CraftTweaker Analysis", description = "Profiles CraftTweaker and scripts that use it.")
 public class ProfileCraftTweaker extends Profiler {
@@ -22,6 +23,11 @@ public class ProfileCraftTweaker extends Profiler {
     private final Map<String, Long> start = new HashMap<>();
     private final Map<String, Long> stop = new HashMap<>();
 
+    public boolean isEnabled () {
+
+        return Loader.isModLoaded("crafttweaker");
+    }
+    
     @Override
     public void onPreInit () {
 
