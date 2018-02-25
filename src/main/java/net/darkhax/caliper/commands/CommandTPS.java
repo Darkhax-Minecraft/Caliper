@@ -1,4 +1,4 @@
-package com.jarhax.caliper.commands;
+package net.darkhax.caliper.commands;
 
 import net.darkhax.bookshelf.command.Command;
 import net.darkhax.bookshelf.lib.TableBuilder;

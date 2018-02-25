@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling.profilers.textures;
+package net.darkhax.caliper.profiling.profilers.textures;
 
 import org.apache.commons.io.FileUtils;
 

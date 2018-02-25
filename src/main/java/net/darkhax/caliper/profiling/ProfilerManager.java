@@ -1,12 +1,11 @@
-package com.jarhax.caliper.profiling;
+package net.darkhax.caliper.profiling;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.jarhax.caliper.Caliper;
-
 import net.darkhax.bookshelf.util.AnnotationUtils;
+import net.darkhax.caliper.Caliper;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 

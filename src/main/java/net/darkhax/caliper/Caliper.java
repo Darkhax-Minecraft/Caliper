@@ -1,13 +1,12 @@
-package com.jarhax.caliper;
+package net.darkhax.caliper;
 
 import java.io.File;
 
-import com.jarhax.caliper.commands.CommandCaliper;
-import com.jarhax.caliper.profiling.Profiler;
-import com.jarhax.caliper.profiling.ProfilerManager;
-
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
+import net.darkhax.caliper.commands.CommandCaliper;
+import net.darkhax.caliper.profiling.Profiler;
+import net.darkhax.caliper.profiling.ProfilerManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;

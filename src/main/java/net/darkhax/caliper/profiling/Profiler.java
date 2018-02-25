@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling;
+package net.darkhax.caliper.profiling;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

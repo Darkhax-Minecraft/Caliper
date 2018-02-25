@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling;
+package net.darkhax.caliper.profiling;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

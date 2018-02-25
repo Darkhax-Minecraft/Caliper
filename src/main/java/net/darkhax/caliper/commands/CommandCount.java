@@ -1,4 +1,4 @@
-package com.jarhax.caliper.commands;
+package net.darkhax.caliper.commands;
 
 import java.util.Collections;
 import java.util.HashMap;

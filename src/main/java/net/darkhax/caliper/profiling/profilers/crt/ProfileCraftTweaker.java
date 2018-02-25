@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling.profilers.crt;
+package net.darkhax.caliper.profiling.profilers.crt;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,14 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.jarhax.caliper.Caliper;
-import com.jarhax.caliper.FileHelper;
-import com.jarhax.caliper.profiling.Profiler;
-import com.jarhax.caliper.profiling.RegisterProfiler;
-import com.jarhax.caliper.profiling.profilers.LoadTime;
-
 import crafttweaker.CraftTweakerAPI;
 import net.darkhax.bookshelf.lib.TableBuilder;
+import net.darkhax.caliper.Caliper;
+import net.darkhax.caliper.FileHelper;
+import net.darkhax.caliper.profiling.Profiler;
+import net.darkhax.caliper.profiling.RegisterProfiler;
+import net.darkhax.caliper.profiling.profilers.LoadTime;
 
 @RegisterProfiler(name = "CraftTweaker Analysis", description = "Profiles CraftTweaker and scripts that use it.")
 public class ProfileCraftTweaker extends Profiler {

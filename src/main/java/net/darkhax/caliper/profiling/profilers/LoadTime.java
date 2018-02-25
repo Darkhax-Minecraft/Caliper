@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling.profilers;
+package net.darkhax.caliper.profiling.profilers;
 
 import net.darkhax.bookshelf.lib.TableBuilder;
 

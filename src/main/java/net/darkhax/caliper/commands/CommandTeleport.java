@@ -1,4 +1,4 @@
-package com.jarhax.caliper.commands;
+package net.darkhax.caliper.commands;
 
 import org.apache.commons.lang3.math.NumberUtils;
 

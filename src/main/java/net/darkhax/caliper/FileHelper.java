@@ -1,4 +1,4 @@
-package com.jarhax.caliper;
+package net.darkhax.caliper;
 
 import java.io.FileWriter;
 import java.io.IOException;

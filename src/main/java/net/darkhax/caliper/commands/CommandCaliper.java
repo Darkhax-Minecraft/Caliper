@@ -1,4 +1,4 @@
-package com.jarhax.caliper.commands;
+package net.darkhax.caliper.commands;
 
 import net.darkhax.bookshelf.command.CommandTree;
 import net.minecraft.command.ICommandSender;

@@ -1,4 +1,4 @@
-package com.jarhax.caliper.profiling.profilers.textures;
+package net.darkhax.caliper.profiling.profilers.textures;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,13 +7,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jarhax.caliper.Caliper;
-import com.jarhax.caliper.FileHelper;
-import com.jarhax.caliper.profiling.Profiler;
-import com.jarhax.caliper.profiling.RegisterProfiler;
-
 import net.darkhax.bookshelf.lib.TableBuilder;
 import net.darkhax.bookshelf.util.RenderUtils;
+import net.darkhax.caliper.Caliper;
+import net.darkhax.caliper.FileHelper;
+import net.darkhax.caliper.profiling.Profiler;
+import net.darkhax.caliper.profiling.RegisterProfiler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
