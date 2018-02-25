@@ -7,10 +7,15 @@ public class InfoPair implements Comparable<InfoPair> {
     private final String key;
     private final long value;
 
-    public InfoPair (String name, long start, long stop) {
+    public InfoPair (String key, long value) {
 
-        this.key = name;
-        this.value = stop - start;
+        this.key = key;
+        this.value = value;
+    }
+
+    public static TableBuilder<InfoPair> createDataTable (String key, String value) {
+
+        return createDataTable(key, value, "");
     }
 
     public static TableBuilder<InfoPair> createDataTable (String key, String value, String valueSuffix) {
