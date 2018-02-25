@@ -44,7 +44,7 @@ public class ProfileTextureMap extends Profiler {
     public void onClientLoadComplete () {
 
         final TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
-        final File file = new File(Caliper.LOG_DIR, "texture-analysis.md");
+        final File file = new File(Caliper.LOG_DIR, "texture-maps.md");
 
         try (final FileWriter writer = new FileWriter(file, false)) {
 
