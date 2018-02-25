@@ -3,17 +3,14 @@ package com.jarhax.caliper;
 import java.io.File;
 
 import com.jarhax.caliper.commands.CommandCaliper;
-import com.jarhax.caliper.debuggers.DebugEntitySpawns;
-import com.jarhax.caliper.debuggers.DebugEventListeners;
-import com.jarhax.caliper.debuggers.DebugIdUsage;
-import com.jarhax.caliper.debuggers.DebugLoadtimes;
-import com.jarhax.caliper.debuggers.DebugTextureMap;
+import com.jarhax.caliper.profiling.Profiler;
+import com.jarhax.caliper.profiling.ProfilerManager;
 
 import net.darkhax.bookshelf.BookshelfRegistry;
 import net.darkhax.bookshelf.lib.LoggingHelper;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
@@ -26,18 +23,30 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Caliper {
 
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
+    public static final ProfilerManager PROFILER_MANAGER = new ProfilerManager();
+    public static final File LOG_DIR = new File("logs/caliper/");
 
-    public Caliper () {
+    @EventHandler
+    public void onConstruction (FMLConstructionEvent event) {
 
-        // Apply a log4j filter to read load time messages.
-        ((org.apache.logging.log4j.core.Logger) FMLLog.log).addFilter(new DebugLoadtimes());
+        // Create caliper logs folder if it doesn't already exist.
+        if (!LOG_DIR.exists()) {
+
+            LOG_DIR.mkdirs();
+        }
+
+        // Load all of the profilers from annotation table
+        PROFILER_MANAGER.init(event.getASMHarvestedData());
+
+        // Call all onConstructed profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onConstructed);
     }
 
     @Mod.EventHandler
     public void preInit (FMLPreInitializationEvent event) {
 
-        // Create the caliper log directory if it doesn't exist.
-        new File("logs/caliper/").mkdirs();
+        // Call all onPreInit profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onPreInit);
 
         // Adds the caliper tree command.
         BookshelfRegistry.addCommand(new CommandCaliper());
@@ -46,39 +55,35 @@ public class Caliper {
     @EventHandler
     public void init (FMLInitializationEvent event) {
 
+        // Call all onInit profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onInit);
     }
 
     @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
 
-        // Finds broken entity spawns
-        // TODO replace with error detecting system.
-        DebugEntitySpawns.debug();
+        // Call all onPostInit profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onPostInit);
     }
 
     @EventHandler
     public void onLoadComplete (FMLLoadCompleteEvent event) {
 
-        // Prints load time info.
-        DebugLoadtimes.onLoadingComplete();
-
-        // Prints all current event listeners.
-        DebugEventListeners.printAllListeners();
-
-        // Prints registry id usage.
-        DebugIdUsage.onLoadingComplete();
+        // Call all onLoadComplete profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onLoadComplete);
     }
 
     @EventHandler
     @SideOnly(Side.CLIENT)
     public void onClientLoadComplete (FMLLoadCompleteEvent event) {
 
-        DebugTextureMap.run();
+        // Call all onClientLoadComplete profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onClientLoadComplete);
     }
 
     @EventHandler
     public void onFingerprintViolation (FMLFingerprintViolationEvent event) {
 
-        LOG.warn("Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported by the author!");
+        LOG.warn("Invalid fingerprint detected! The file {} may have been tampered with. This version will NOT be supported by the author!", event.getSource().getName());
     }
 }

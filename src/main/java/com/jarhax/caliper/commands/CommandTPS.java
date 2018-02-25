@@ -1,8 +1,7 @@
 package com.jarhax.caliper.commands;
 
-import com.jarhax.caliper.TableBuilder;
-
 import net.darkhax.bookshelf.command.Command;
+import net.darkhax.bookshelf.lib.TableBuilder;
 import net.darkhax.bookshelf.util.WorldUtils;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
