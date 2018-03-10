@@ -23,11 +23,12 @@ public class ProfileCraftTweaker extends Profiler {
     private final Map<String, Long> start = new HashMap<>();
     private final Map<String, Long> stop = new HashMap<>();
 
+    @Override
     public boolean isEnabled () {
 
         return Loader.isModLoaded("crafttweaker");
     }
-    
+
     @Override
     public void onPreInit () {
 
