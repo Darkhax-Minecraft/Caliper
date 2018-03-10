@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.eventhandler.IEventListener;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
-@RegisterProfiler(name = "Event Analysis", description = "Digs through registered forge events to dump usage info..")
+@RegisterProfiler(name = "Event Analysis", description = "Digs through registered forge events to dump usage info.")
 public class ProfileEvents extends Profiler {
 
     private final Multimap<String, EventInfo> allEvents = HashMultimap.create();
