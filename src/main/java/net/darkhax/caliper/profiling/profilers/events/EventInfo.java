@@ -16,21 +16,22 @@ public class EventInfo {
     private String method = "unknown";
     private String priority = "unknown";
     private String recievedCanceled = "unknown";
-    private boolean isModEvent = true;
+    private final boolean isModEvent = true;
 
     public EventInfo (ASMEventHandler event) {
 
-        // Splits the readable info into parts, so we can grab info no longer available.
-        final String[] parts = event.toString().split(" ");
-
         try {
 
-            if (!parts[1].equalsIgnoreCase("forge")) {
+            final String[] info = event.toString().split(" ");
 
-                // Sets info from readable data
-                this.location = parts[1].substring(0, parts[1].lastIndexOf("@"));
-                this.event = parts[2].substring(parts[2].lastIndexOf("/") + 1, parts[2].length() - 3);
-                this.method = parts[2].substring(0, parts[2].indexOf("("));
+            if ("ASM:".equalsIgnoreCase(info[0])) {
+
+                final String locationInfo = info.length == 3 ? info[1] : info.length == 4 ? info[2] : "unknown";
+                final String eventInfo = info.length == 3 ? info[2] : info.length == 4 ? info[3] : "unknown";
+
+                this.location = locationInfo.contains("@") ? locationInfo.substring(0, locationInfo.lastIndexOf('@')) : locationInfo;
+                this.event = eventInfo.substring(eventInfo.lastIndexOf('/') + 1, eventInfo.length() - 3);
+                this.method = eventInfo.substring(0, eventInfo.indexOf('('));
 
                 // Gets info from the annotation
                 final SubscribeEvent subInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
@@ -52,13 +53,14 @@ public class EventInfo {
 
             else {
 
-                this.isModEvent = false;
+                Caliper.LOG.warn("Unable to parse event listener: {}.", event.toString());
             }
         }
 
-        catch (final StringIndexOutOfBoundsException e) {
+        catch (final Exception e) {
 
-            Caliper.LOG.error("Unable to parse event listener: " + event.toString());
+            Caliper.LOG.error("Unable to parse event listener: {}.", event.toString());
+            Caliper.LOG.catching(e);
         }
     }
 
