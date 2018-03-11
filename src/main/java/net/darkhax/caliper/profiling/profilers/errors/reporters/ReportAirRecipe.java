@@ -2,17 +2,13 @@ package net.darkhax.caliper.profiling.profilers.errors.reporters;
 
 import java.util.StringJoiner;
 
-import net.darkhax.bookshelf.util.ModUtils;
 import net.darkhax.caliper.FileHelper;
 import net.darkhax.caliper.profiling.profilers.errors.ErrorReporter;
 import net.darkhax.caliper.profiling.profilers.errors.Level;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ReportAirRecipe extends ErrorReporter {
@@ -39,28 +35,29 @@ public class ReportAirRecipe extends ErrorReporter {
         for (final IRecipe recipe : ForgeRegistries.RECIPES) {
 
             if (!recipe.isDynamic()) {
-                
-                if (recipe.getRecipeOutput().isEmpty() || containsAir(recipe.getIngredients())) {
-                    
+
+                if (recipe.getRecipeOutput().isEmpty() || this.containsAir(recipe.getIngredients())) {
+
                     this.joiner.add(String.format("Recipe: %s Class: %s", recipe.getRegistryName().toString(), recipe.getClass().toGenericString()));
+                    errorCount++;
                 }
             }
         }
     }
-   
+
     private boolean containsAir (NonNullList<Ingredient> ingredients) {
-        
-        for (Ingredient ingredient : ingredients) {
-            
-            for (ItemStack stack : ingredient.getMatchingStacks()) {
-                
+
+        for (final Ingredient ingredient : ingredients) {
+
+            for (final ItemStack stack : ingredient.getMatchingStacks()) {
+
                 if (stack.isEmpty()) {
-                    
+
                     return true;
                 }
             }
         }
-        
+
         return false;
     }
 
