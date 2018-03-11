@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 
-@RegisterProfiler(name = "Event Analysis", description = "Digs through registered forge events to dump usage info.")
+@RegisterProfiler(name = "Load Times", description = "Digs through registered forge events to dump usage info.")
 public class DebugLoadtimes extends Profiler {
 
     private static final Map<String, LoadInfo> MODS = new HashMap<>();
