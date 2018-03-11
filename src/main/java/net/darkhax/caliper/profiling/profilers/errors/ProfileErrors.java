@@ -11,6 +11,7 @@ import net.darkhax.caliper.Caliper;
 import net.darkhax.caliper.FileHelper;
 import net.darkhax.caliper.profiling.Profiler;
 import net.darkhax.caliper.profiling.RegisterProfiler;
+import net.darkhax.caliper.profiling.profilers.errors.reporters.ReportAirRecipe;
 import net.darkhax.caliper.profiling.profilers.errors.reporters.ReportBadMobSpawns;
 import net.darkhax.caliper.profiling.profilers.errors.reporters.ReportMissingEnchantmentDescriptions;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,6 +27,7 @@ public class ProfileErrors extends Profiler {
     public void onPreInit () {
 
         this.errorReporters.add(new ReportBadMobSpawns());
+        this.errorReporters.add(new ReportAirRecipe());
     }
 
     @Override
