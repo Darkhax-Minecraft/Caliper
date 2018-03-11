@@ -12,7 +12,7 @@ public class ReportBadVersion extends ErrorReporter {
 
     private final StringJoiner joiner = new StringJoiner(FileHelper.NEW_LINE);
 
-    private final int errorCount = 0;
+    private int errorCount = 0;
 
     @Override
     public String getErrors () {
@@ -34,6 +34,7 @@ public class ReportBadVersion extends ErrorReporter {
             if ("@VERSION@".equalsIgnoreCase(mod.getVersion())) {
 
                 this.joiner.add(String.format("Mod: %s File: %s", mod.getName(), mod.getSource().getName()));
+                errorCount++;
             }
         }
     }
