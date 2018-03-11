@@ -8,7 +8,10 @@ import net.darkhax.caliper.profiling.profilers.errors.Level;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class ReportMissingEnchantmentDescriptions extends ErrorReporter {
 
     private final StringJoiner joiner = new StringJoiner(FileHelper.NEW_LINE);
