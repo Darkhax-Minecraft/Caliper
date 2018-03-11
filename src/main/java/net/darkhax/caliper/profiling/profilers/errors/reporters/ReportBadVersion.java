@@ -34,7 +34,7 @@ public class ReportBadVersion extends ErrorReporter {
             if ("@VERSION@".equalsIgnoreCase(mod.getVersion())) {
 
                 this.joiner.add(String.format("Mod: %s File: %s", mod.getName(), mod.getSource().getName()));
-                errorCount++;
+                this.errorCount++;
             }
         }
     }

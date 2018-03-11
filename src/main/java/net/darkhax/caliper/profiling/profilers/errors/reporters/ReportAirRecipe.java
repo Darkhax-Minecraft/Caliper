@@ -39,7 +39,7 @@ public class ReportAirRecipe extends ErrorReporter {
                 if (recipe.getRecipeOutput().isEmpty() || this.containsAir(recipe.getIngredients())) {
 
                     this.joiner.add(String.format("Recipe: %s Class: %s", recipe.getRegistryName().toString(), recipe.getClass().toGenericString()));
-                    errorCount++;
+                    this.errorCount++;
                 }
             }
         }
