@@ -13,6 +13,11 @@ public class Profiler {
 
     }
 
+    @SideOnly(Side.CLIENT)
+    public void onPreInitClient () {
+
+    }
+
     public void onInit () {
 
     }

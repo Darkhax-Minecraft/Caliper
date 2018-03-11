@@ -51,6 +51,14 @@ public class Caliper {
         BookshelfRegistry.addCommand(new CommandCaliper());
     }
 
+    @Mod.EventHandler
+    @SideOnly(Side.CLIENT)
+    public void preInitClient (FMLPreInitializationEvent event) {
+
+        // Call all onPreInitClient profiler hooks.
+        PROFILER_MANAGER.getFeatures().forEach(Profiler::onPreInitClient);
+    }
+
     @EventHandler
     public void init (FMLInitializationEvent event) {
 
