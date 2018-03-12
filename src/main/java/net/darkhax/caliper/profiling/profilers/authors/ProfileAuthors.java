@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
+
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 
 import net.darkhax.caliper.Caliper;
 import net.darkhax.caliper.FileHelper;
@@ -25,22 +28,38 @@ public class ProfileAuthors extends Profiler {
     @Override
     public void onLoadComplete () {
 
-        final List<String> authors = new ArrayList<>();
+        final Multimap<String, String> authors = ArrayListMultimap.create();
 
         for (final ModContainer mod : Loader.instance().getIndexedModList().values()) {
 
-            authors.addAll(mod.getMetadata().authorList);
+            for (final String author : mod.getMetadata().authorList) {
+
+                authors.put(author.toLowerCase(), mod.getName());
+            }
         }
 
-        final Map<String, Long> counts = authors.stream().collect(Collectors.groupingBy(e -> e.toLowerCase(), Collectors.counting()));
+        final List<AuthorInfo> authorInfo = new ArrayList<>();
+
+        for (final String author : authors.keySet()) {
+
+            final Collection<String> mods = authors.get(author);
+            authorInfo.add(new AuthorInfo(author, mods.size(), mods));
+        }
+
+        Collections.sort(authorInfo, Collections.reverseOrder());
 
         try (final FileWriter writer = new FileWriter(this.file, false)) {
 
             FileHelper.writeInfoBlock(writer, 0, "Author Count", "This is a list of all the authors of the mods in the instance sorted by how many they have.", true);
 
-            for (final Entry<String, Long> s : entriesSortedByValues(counts)) {
+            for (final AuthorInfo author : authorInfo) {
 
-                writer.append(s.getValue() + " - " + s.getKey() + FileHelper.NEW_LINE);
+                writer.write(author.getModCount() + " - " + author.getAuthor() + FileHelper.NEW_LINE);
+
+                for (final String mod : author.getMods()) {
+
+                    writer.write("     - " + mod + FileHelper.NEW_LINE);
+                }
             }
         }
 
