@@ -53,7 +53,10 @@ public class ProfileCraftTweaker extends Profiler {
 
         for (final Entry<String, Long> entry : this.start.entrySet()) {
 
-            builder.addEntry(new InfoPair(entry.getKey(), entry.getValue() - this.stop.get(entry.getKey())));
+            if (entry.getValue() != null && this.stop.containsKey(entry.getKey())) {
+
+                builder.addEntry(new InfoPair(entry.getKey(), this.stop.get(entry.getKey()) - entry.getValue()));
+            }
         }
 
         Collections.sort(builder.getEntries(), Collections.reverseOrder());
