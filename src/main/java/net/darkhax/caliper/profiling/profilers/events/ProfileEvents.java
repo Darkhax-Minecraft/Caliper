@@ -47,7 +47,7 @@ public class ProfileEvents extends Profiler {
             FileHelper.writeInfoBlock(writer, 1, "Event Analysis", "This file contains an analysis on the various forge event busses. This first table lists events that have listeners, in order of most listeners. Further specifics on the listenrs.", true);
             writer.append(eventCounts.createString());
 
-            for (final String eventName : this.allEvents.keys()) {
+            for (final String eventName : this.allEvents.keySet()) {
 
                 writer.append(FileHelper.NEW_PARAGRAPH);
                 writer.append("## " + eventName + FileHelper.NEW_LINE);
