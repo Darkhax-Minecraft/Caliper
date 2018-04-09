@@ -13,6 +13,7 @@ import net.darkhax.caliper.Caliper;
 import net.darkhax.caliper.FileHelper;
 import net.darkhax.caliper.profiling.Profiler;
 import net.darkhax.caliper.profiling.RegisterProfiler;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -41,6 +42,34 @@ public class ProfileRegistries extends Profiler {
         this.profileRegistry(ForgeRegistries.RECIPES, "recipes", Integer.MAX_VALUE >> 5);
         this.profileRegistry(ForgeRegistries.ENTITIES, "entity", Integer.MAX_VALUE >> 5);
         this.profileRegistry(ForgeRegistries.ENCHANTMENTS, "enchantment", Short.MAX_VALUE - 1);
+        
+        this.profileDimensions();
+    }
+    
+    private void profileDimensions() {
+        
+        try (final FileWriter writer = new FileWriter(new File(this.registryDir, "dimensions" + ".md"), false)) {
+
+            final TableBuilder<DimensionType> dimTable = new TableBuilder<>();
+            dimTable.addColumn("Name", dim -> dim.getName().replace("_", " "));
+            dimTable.addColumn("Id", dim -> Integer.toString(dim.getId()));
+            dimTable.addColumn("Spawn", DimensionType::shouldLoadSpawn);
+            
+            for (DimensionType dimType : DimensionType.values()) {
+                
+                dimTable.addEntry(dimType);
+            }
+            
+            FileHelper.writeInfoBlock(writer, 1, "Dimension" + " Registry Analysis", "This file contains info about the various dimensions in a pack.", true);
+
+            writer.append(FileHelper.NEW_LINE);
+            writer.append(dimTable.createString());
+        }
+
+        catch (final IOException e) {
+
+            Caliper.LOG.catching(e);
+        }
     }
 
     private void profileRegistry (IForgeRegistry<?> registry, String name, int max) {
