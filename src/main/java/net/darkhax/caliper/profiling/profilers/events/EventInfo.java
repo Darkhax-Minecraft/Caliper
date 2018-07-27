@@ -31,8 +31,14 @@ public class EventInfo {
 
                 this.location = locationInfo.contains("@") ? locationInfo.substring(0, locationInfo.lastIndexOf('@')) : locationInfo;
                 this.event = eventInfo.substring(eventInfo.lastIndexOf('/') + 1, eventInfo.length() - 3);
-                this.method = eventInfo.substring(0, eventInfo.indexOf('('));
-
+                
+                if (eventInfo.indexOf('(') > 0)
+                    this.method = eventInfo.substring(0, eventInfo.indexOf('('));
+                else{
+                    Caliper.LOG.warn("Unable to parse event listener: {}.", event.toString());
+                    return;
+                }
+                    
                 // Gets info from the annotation
                 final SubscribeEvent subInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
 
