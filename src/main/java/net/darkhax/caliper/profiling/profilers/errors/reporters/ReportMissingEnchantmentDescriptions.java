@@ -52,7 +52,7 @@ public class ReportMissingEnchantmentDescriptions extends ErrorReporter {
 
         for (final Enchantment ench : ForgeRegistries.ENCHANTMENTS) {
 
-            if ("minecraft".equals(ench.getRegistryName().getResourceDomain())) {
+            if ("minecraft".equals(ench.getRegistryName().getNamespace())) {
 
                 continue;
             }
@@ -72,7 +72,7 @@ public class ReportMissingEnchantmentDescriptions extends ErrorReporter {
 
         if (enchant != null && enchant.getRegistryName() != null) {
 
-            return String.format("enchantment.%s.%s.desc", enchant.getRegistryName().getResourceDomain(), enchant.getRegistryName().getResourcePath());
+            return String.format("enchantment.%s.%s.desc", enchant.getRegistryName().getNamespace(), enchant.getRegistryName().getPath());
         }
 
         return "NULL";
