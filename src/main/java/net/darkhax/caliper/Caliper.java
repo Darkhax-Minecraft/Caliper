@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = "caliper", name = "Caliper", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", certificateFingerprint = "@FINGERPRINT@")
+@Mod(modid = "caliper", name = "Caliper", version = "@VERSION@", dependencies = "required-after:bookshelf@[2.2.462,)", acceptableRemoteVersions = "*", certificateFingerprint = "@FINGERPRINT@")
 public class Caliper {
 
     public static final LoggingHelper LOG = new LoggingHelper("Caliper");
