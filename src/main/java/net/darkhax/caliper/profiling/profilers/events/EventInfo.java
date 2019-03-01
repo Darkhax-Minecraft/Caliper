@@ -79,7 +79,7 @@ public class EventInfo {
         table.addColumn("Location", info -> info.location);
         table.addColumn("Priority", info -> info.priority);
         table.addColumn("Source", info -> info.source);
-        table.addColumn("RecieveCandeled", info -> info.recievedCanceled);
+        table.addColumn("RecieveCanceled", info -> info.recievedCanceled);
         return table;
     }
 
