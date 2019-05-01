@@ -32,9 +32,12 @@ public class ProfileAuthors extends Profiler {
 
         for (final ModContainer mod : Loader.instance().getIndexedModList().values()) {
 
-            for (final String author : mod.getMetadata().authorList) {
+            if (mod.getMetadata() != null && mod.getMetadata().authorList != null) {
+                
+                for (final String author : mod.getMetadata().authorList) {
 
-                authors.put(author.toLowerCase(), mod.getName());
+                    authors.put(author.toLowerCase(), mod.getName());
+                }
             }
         }
 
