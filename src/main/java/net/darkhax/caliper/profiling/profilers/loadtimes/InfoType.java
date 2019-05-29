@@ -32,7 +32,7 @@ enum InfoType {
                 info[1] = info[1].substring(0, info[1].length() - 1);
 
                 // Adds the time to the info object.
-                this.op.addInfo(DebugLoadtimes.getLoadInfo(info[0]), Double.parseDouble(info[1]));
+                this.op.addInfo(DebugLoadtimes.getLoadInfo(info[0]), Double.parseDouble(info[1].replace(",", ".")));
 
                 return true;
             }
