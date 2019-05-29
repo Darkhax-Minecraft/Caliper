@@ -51,12 +51,25 @@ public class ProfileErrors extends Profiler {
 
             FileHelper.writeInfoBlock(writer, 0, "Error Reports", "This file contains errors that were found with the pack. If there are no errors listed below, none were detected.", true);
 
+            boolean first = true;
+            
             for (final ErrorReporter reporter : this.errorReporters) {
 
                 if (reporter.foundErrors()) {
-
+                    
+                    if (!first) {
+                        
+                        writer.append(FileHelper.NEW_LINE);
+                        writer.append(FileHelper.NEW_LINE);
+                    }
+                    
                     FileHelper.writeInfoBlock(writer, 1, reporter.getName(), reporter.getDescription());
                     writer.write(reporter.getErrors());
+                    
+                    if (first) {
+                        
+                        first = false;
+                    }
                 }
             }
         }
