@@ -7,7 +7,7 @@ import net.darkhax.bookshelf.util.MathsUtils;
 import net.darkhax.caliper.Caliper;
 import net.minecraftforge.fml.common.FMLModContainer;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 /**
  * This object represents a bunch of load time info for a mod.
@@ -69,7 +69,7 @@ class LoadInfo implements Comparable<LoadInfo> {
 
                 if (container instanceof FMLModContainer) {
 
-                    this.signed = !(boolean) ReflectionHelper.getPrivateValue(FMLModContainer.class, (FMLModContainer) container, "fingerprintNotPresent");
+                    this.signed = !(boolean) ObfuscationReflectionHelper.getPrivateValue(FMLModContainer.class, (FMLModContainer) container, "fingerprintNotPresent");
 
                     if (this.signed) {
 

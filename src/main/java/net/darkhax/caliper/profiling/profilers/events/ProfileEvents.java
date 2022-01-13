@@ -18,10 +18,10 @@ import net.darkhax.caliper.profiling.Profiler;
 import net.darkhax.caliper.profiling.RegisterProfiler;
 import net.darkhax.caliper.profiling.profilers.InfoPair;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.ASMEventHandler;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.eventhandler.IEventListener;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 @RegisterProfiler(name = "Event Analysis", description = "Digs through registered forge events to dump usage info.")
 public class ProfileEvents extends Profiler {
@@ -72,7 +72,7 @@ public class ProfileEvents extends Profiler {
 
         for (final EventBus bus : busses) {
 
-            final ConcurrentHashMap<Object, ArrayList<IEventListener>> listeners = ReflectionHelper.getPrivateValue(EventBus.class, bus, "listeners");
+            final ConcurrentHashMap<Object, ArrayList<IEventListener>> listeners = ObfuscationReflectionHelper.getPrivateValue(EventBus.class, bus, "listeners");
 
             for (final Entry<Object, ArrayList<IEventListener>> s : listeners.entrySet()) {
 

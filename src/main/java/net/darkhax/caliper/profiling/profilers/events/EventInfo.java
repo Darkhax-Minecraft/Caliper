@@ -3,9 +3,9 @@ package net.darkhax.caliper.profiling.profilers.events;
 import net.darkhax.bookshelf.lib.TableBuilder;
 import net.darkhax.caliper.Caliper;
 import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.eventhandler.ASMEventHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class EventInfo {
 
@@ -40,7 +40,7 @@ public class EventInfo {
                 }
                     
                 // Gets info from the annotation
-                final SubscribeEvent subInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
+                final SubscribeEvent subInfo = ObfuscationReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "subInfo");
 
                 if (subInfo != null) {
 
@@ -48,7 +48,7 @@ public class EventInfo {
                     this.recievedCanceled = Boolean.toString(subInfo.receiveCanceled());
                 }
 
-                final ModContainer ownerInfo = ReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "owner");
+                final ModContainer ownerInfo = ObfuscationReflectionHelper.getPrivateValue(ASMEventHandler.class, event, "owner");
 
                 if (this.owner != null) {
 
